@@ -17,14 +17,13 @@ void toString(int n,char *string) {
 	*teens[] = {"", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
 
 	int i,
-		hasTier = 0,
+		space = 1,
 		place = 1,
-		isTeen = 0,
 		isNegative = 0;
 
 	if (n < 0) {
 		isNegative = 1;
-		n = n * -1;
+		n *= -1;
 	}
 
 	while(1) {
@@ -43,34 +42,29 @@ void toString(int n,char *string) {
 				break;
 			case 1:
 				if (n % 10 == 1) {
-					isTeen = digit;
+					strcat(tempString, teens[digit]);
 				} else {
 					strcat(tempString, tier1[digit]);
 				}
 
 				// check if there are no-zero numbers to put the name of the tier
 				if (digit != 0 || n % 100 != 0) {
-					if(digit != 0) {
-						strcat(tempString, " ");
-					}
+					strcat(tempString, " ");
 					strcat(tempString, tier3[(int)place/3]);
-					hasTier = 1;
+					space = 1;
 				}
 				break;
 			case 2:
 				// check if it is teen
-				if (isTeen) {
-					strcat(tempString, teens[isTeen]);
-					isTeen = 0;
-				} else {
+				if (digit != 1) {
 					strcat(tempString, tier2[digit]);
 				}
 				break;
 		}
 		
-		if (digit != 0 || hasTier) {
+		if (space) {
 			strcat(tempString, " ");
-			hasTier = 0;
+			space = 0;
 		}
 		strcat(tempString, string);
 		

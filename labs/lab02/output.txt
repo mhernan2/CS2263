@@ -1,0 +1,60 @@
+--------------------------------------------------------------------------------
+Command:            ./hamilton
+Massif arguments:   --time-unit=B
+ms_print arguments: massif.out.9898
+--------------------------------------------------------------------------------
+
+
+    KB
+2.016^                                    ##################                  
+     |                                    #                                   
+     |                                    #                                   
+     |                                    #                                   
+     |                                    #                                   
+     |                                    #                                   
+     |                                    #                                   
+     |                                    #                                   
+     |                                    #                                   
+     |                                    #                                   
+     |                  ::::::::::::::::::#                 ::::::::::::::::: 
+     |                  :                 #                 :                 
+     |                  :                 #                 :                 
+     |                  :                 #                 :                 
+     |                  :                 #                 :                 
+     |                  :                 #                 :                 
+     |                  :                 #                 :                 
+     |                  :                 #                 :                 
+     |                  :                 #                 :                 
+     |                  :                 #                 :                 
+   0 +----------------------------------------------------------------------->KB
+     0                                                                   4.031
+
+Number of snapshots: 6
+ Detailed snapshots: [3 (peak)]
+
+--------------------------------------------------------------------------------
+  n        time(B)         total(B)   useful-heap(B) extra-heap(B)    stacks(B)
+--------------------------------------------------------------------------------
+  0              0                0                0             0            0
+  1          1,032            1,032            1,024             8            0
+  2          2,064            2,064            2,048            16            0
+  3          2,064            2,064            2,048            16            0
+99.22% (2,048B) (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+->99.22% (2,048B) 0x4E9E1D3: _IO_file_doallocate (filedoalloc.c:127)
+  ->99.22% (2,048B) 0x4EAC592: _IO_doallocbuf (genops.c:398)
+    ->49.61% (1,024B) 0x4EAB69A: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:556)
+    | ->49.61% (1,024B) 0x4EAC60C: _IO_default_uflow (genops.c:413)
+    |   ->49.61% (1,024B) 0x4E8D25E: _IO_vfscanf (vfscanf.c:634)
+    |     ->49.61% (1,024B) 0x4E9C5DD: __isoc99_scanf (isoc99_scanf.c:37)
+    |       ->49.61% (1,024B) 0x4008E0: main (in /home/mhernan2/Classes/2018 Summer/CS2263/labs/lab02/hamilton)
+    |         
+    ->49.61% (1,024B) 0x4EAB8F6: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:820)
+      ->49.61% (1,024B) 0x4EAA28B: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1331)
+        ->49.61% (1,024B) 0x4EA0736: puts (ioputs.c:40)
+          ->49.61% (1,024B) 0x400B07: main (in /home/mhernan2/Classes/2018 Summer/CS2263/labs/lab02/hamilton)
+            
+--------------------------------------------------------------------------------
+  n        time(B)         total(B)   useful-heap(B) extra-heap(B)    stacks(B)
+--------------------------------------------------------------------------------
+  4          3,096            1,032            1,024             8            0
+  5          4,128                0                0             0            0

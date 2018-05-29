@@ -9,9 +9,9 @@
 int main() {
 	// scan the operation to be performed
 	char operation[30];
-	fgets(operation, 30, stdin);
+	scanf("%s", operation);
 	// get the input values for matrix1
-	int i, r1, c1, r2, c2, **matrix1, **matrix2, *m1, *m2, **resultingMatrix;
+	int i, r1, c1, r2, c2, **matrix1, **matrix2, *m1, *m2;
 	scanf("%d%d\n", &r1, &c1);
 	matrix1 = malloc(r1*sizeof(int*));
 	m1 = malloc(r1*c1*sizeof(int));
@@ -33,18 +33,22 @@ int main() {
 	// read the values into the matrix
 	for (i = 0; i < r2*c2; i++) {
 		scanf("%d", &m2[i]);
-	}	
+	}
 
-	if(strcmp(operation, MULTIPLICATION)) {
-		resultingMatrix = matrix_mult(matrix1, r1, c1, matrix2, r2, c2);
-	} else if(strcmp(operation, ADDITION)) {
-		resultingMatrix = matrix_add(matrix1, r1, c1, matrix2, r2, c2);
+	if(strcmp(operation, MULTIPLICATION) == 0) {
+		matrix_mult(matrix1, r1, c1, matrix2, r2, c2);
+	} else if(strcmp(operation, ADDITION) == 0) {
+		matrix_add(matrix1, r1, c1, matrix2, r2, c2);
 	} else {
 		printf("unknown operation \"%s\"\n", operation);
 		return 0;
 	}
-
-	printMatrix(resultingMatrix);
+	
+	// free allocated space
+	free(m1);
+	free(m2);
+	free(matrix1);
+	free(matrix2);
 
 	return 0;
 }

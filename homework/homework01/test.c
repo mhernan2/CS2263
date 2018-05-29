@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
  
 int main() {
-	char string[30] = "Mauricio";
+	char *string = "Mauricio";
+	char *string2 = "Mauricio";
 
-	if(string == "Mauricio") {
+	printf("strcmp(string, 'Mauricio') = %d\n", strcmp(string, string2));
+	if(strcmp(string, "Mauricio")) {
 		printf("strings match\n");
 	}
 

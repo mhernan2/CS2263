@@ -16,8 +16,7 @@ void printMatrix(int **m, int r, int c) {
 }
 
 
-// returns an the row vector of a int ** in the form of an array
-// 0 is for rows and 1 for column vector
+// returns a column vector of a matrix in the form of an array
 int *getColumnVector(int index, int length, int **m) {
 	int i, *vector = malloc(length*sizeof(int));
 
@@ -25,23 +24,29 @@ int *getColumnVector(int index, int length, int **m) {
 		vector[i] = m[i][index];
 	}
 
-	return (vector);
+	return vector;
+}
+
+void allocateSpace(int **matrix, int *m, int row, int column) {
+	int i;
+	for (i = 0; i < row; i++) {
+		matrix[i] = m+(i*column);
+	}
 }
 
 
-int ** matrix_mult(int ** matrix1, int r1, int c1, int ** matrix2, int r2, int c2) {
-	// check if int ** is valid
+void matrix_mult(int ** matrix1, int r1, int c1, int ** matrix2, int r2, int c2) {
+	// check if oepartion can be done is valid
 	if (c1 != r2) {
-		return 0;
+		printf("rows of first matrix and columns of second matrix should match\n");
+		return;
 	}
 
 	// create resulting int **
 	int i, j, k, **resultingMatrix = malloc(r1*sizeof(int));
 	int *rm = malloc(r1*c2*sizeof(int));
 
-	for (i = 0; i < r1; i++) {
-		resultingMatrix[i] = rm+(i*c2);
-	}
+	allocateSpace(resultingMatrix, rm, r1, c2);
 
 	for (i = 0; i < c2; i++) {
 		for (j = 0; j < r1; j++) {
@@ -51,20 +56,39 @@ int ** matrix_mult(int ** matrix1, int r1, int c1, int ** matrix2, int r2, int c
 			for (k = 0; k < c1; k++) {
 				result += matrix1[j][k] * column[k];
 			}
-			printf("contents of resultingMatrix[%d][%d]: %d\n", j, i, result);
 			resultingMatrix[j][i] = result;
 		}
 	}
 
-	printf("printing resulting matrix\n");
 	printMatrix(resultingMatrix, r1, c2);
-	return resultingMatrix;
 
+	// free space in memory
+	free(rm);
+	free(resultingMatrix);
 }
 
 
-int ** matrix_add(int **matrix1, int r1, int c1, int **matrix2, int r2, int c2) {
-	int **a = malloc(4*sizeof(int*));
-	return a;
-}
+void matrix_add(int **matrix1, int r1, int c1, int **matrix2, int r2, int c2) {
+	// check if the matrices are valid for addition
+	if (r1 != r2 || c1 != c2) {
+		printf("the dimensions of the matrices do not match\n");
+		return;
+	}
 
+	int i, j, **resultingMatrix = malloc(4*sizeof(int*));
+	int *rm = malloc(r1*c1*sizeof(int));
+	
+	allocateSpace(resultingMatrix, rm, r1, c1);
+	
+	for (i = 0; i < r1; i++) {
+		for (j = 0; j < c1; j++) {
+			resultingMatrix[i][j] = matrix1[i][j] + matrix2[i][j];
+		}
+	}
+
+	printMatrix(resultingMatrix, r1, c1);
+
+	// free space in memory
+	free(rm);
+	free(resultingMatrix);
+}

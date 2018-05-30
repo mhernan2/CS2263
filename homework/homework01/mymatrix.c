@@ -11,7 +11,7 @@ void printMatrix(int **m, int r, int c) {
 			printf("%d", m[i][j]);
 			if (j != c-1) printf(" ");
 		}
-		printf("\n");
+		if (i != r-1) printf("\n");
 	}
 }
 
@@ -57,6 +57,7 @@ void matrix_mult(int ** matrix1, int r1, int c1, int ** matrix2, int r2, int c2)
 				result += matrix1[j][k] * column[k];
 			}
 			resultingMatrix[j][i] = result;
+			free(column);
 		}
 	}
 

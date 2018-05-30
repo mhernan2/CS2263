@@ -1,0 +1,8 @@
+valgrind --tool=memcheck --leak-check=full ./matrix < input1 > output1
+diff -q output1 e_output1
+valgrind --tool=memcheck --leak-check=full ./matrix < input2 > output2
+diff -q output2 e_output2
+valgrind --tool=memcheck --leak-check=full ./matrix < input3 > output3
+diff -q output3 e_output3
+valgrind --tool=memcheck --leak-check=full ./matrix < input4 > output4
+diff -q output4 e_output4

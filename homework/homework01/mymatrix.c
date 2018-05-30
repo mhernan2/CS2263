@@ -43,7 +43,7 @@ void matrix_mult(int ** matrix1, int r1, int c1, int ** matrix2, int r2, int c2)
 	}
 
 	// create resulting int **
-	int i, j, k, **resultingMatrix = malloc(r1*sizeof(int));
+	int i, j, k, **resultingMatrix = malloc(r1*sizeof(int*));
 	int *rm = malloc(r1*c2*sizeof(int));
 
 	allocateSpace(resultingMatrix, rm, r1, c2);
